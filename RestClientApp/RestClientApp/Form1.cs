@@ -28,8 +28,8 @@ namespace RestClientApp
             var request = new RestRequest();
 
             // URLの設定
-            client.BaseUrl = new Uri("http://localhost:8080/json");
-
+            //client.BaseUrl = new Uri("http://localhost:8080/json");
+            client.BaseUrl = new Uri("http://weather.livedoor.com/forecast/webservice/json/v1?city=400040");
             // メソッド、パラメータの指定
             request.Method = Method.POST;
             //request.AddParameter("パラメータ名", "パラメータの値", ParameterType.GetOrPost);
