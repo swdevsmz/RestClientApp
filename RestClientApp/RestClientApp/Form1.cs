@@ -27,39 +27,33 @@ namespace RestClientApp
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            textBox2.Text = "http://weather.livedoor.com/forecast/webservice/json/v1?city=400040";
+            Url.Text = "http://weather.livedoor.com/forecast/webservice/json/v1?city=400040";
         }
 
 
-        private async void Button1_Click(object sender, EventArgs e)
-        {
-            //var response = await client.GetAsync(textBox2.Text);
+        private async void Send_Click(object sender, EventArgs e)
+        {          
+            var request = new HttpRequestMessage(HttpMethod.Post, Url.Text);
             
-            var request = new HttpRequestMessage(HttpMethod.Get, textBox2.Text);
-            request.Headers.Add("ContentType", "application/json; charset=utf-8");
-            //request.Headers.Add("Authorization", "Bearer " + "");
-            //request.Headers.Add("Content-type", "text/html; charset=UTF-8");
+            // リクエストヘッダー情報の設定
+            // Content-typeはContentの第3引数で設定
+            //request.Headers.Add("ContentType", "application/json; charset=utf-8");
+            //request.Headers.Add("Content-Type", "MIME-Type-Here");
+            request.Headers.Add("Authorization", "Bearer " + "12345678");
+            request.Headers.Add("User-Agent", "User-Agent-Here");
+            request.Headers.Add("AAAA", "User-Agent-Here");
+
+            // リクエストボディ情報の設定
+            var json = @"{""foo"":""hoge"", ""bar"":123, ""baz"":[""あ"", ""い"", ""う""]}";
+            request.Content = new StringContent(json, Encoding.UTF8, @"application/json");
+
+            // 送信
             var response = await client.SendAsync(request);
-            //Console.WriteLine(response.StatusCode);
-            //var content = await response.Content.ReadAsByteArrayAsync();
-            //var encoding = Encoding.ASCII;
-            //this.textBox1.Text = encoding.GetString(content);
-            //var content = await response.Content.ReadAsStringAsync();
-            //string s = await UTF8ResponseMessageAsync(response);
 
-            //var str = System.Text.Encoding.UTF8.GetString(await response.Content.ReadAsStringAsync());
+            // 結果の表示
+            this.HttpStatus.Text = ((int)response.StatusCode).ToString();
+            this.Result.Text = Regex.Unescape(response.Content.ReadAsStringAsync().Result);
 
-            this.textBox1.Text = Regex.Unescape(response.Content.ReadAsStringAsync().Result);
-
-            //this.textBox1.Text = str;
-        }
-
-        private async Task<string> UTF8ResponseMessageAsync(HttpResponseMessage result)
-        {
-            //str = System.Text.Encoding.UTF8.GetString(bytesData);
-
-            byte[] isoBites = Encoding.GetEncoding("ISO-8859-1").GetBytes(Regex.Unescape(await result.Content.ReadAsStringAsync()));
-            return Encoding.UTF8.GetString(isoBites, 0, isoBites.Length);
         }
 
 
