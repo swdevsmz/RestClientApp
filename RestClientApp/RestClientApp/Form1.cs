@@ -20,6 +20,8 @@ namespace RestClientApp
 
         private static HttpClient client = new HttpClient();
 
+        private int AddedHeaderIndex = 0;
+
         public Form1()
         {
             InitializeComponent();
@@ -30,13 +32,13 @@ namespace RestClientApp
             Url.Text = "http://weather.livedoor.com/forecast/webservice/json/v1?city=400040";
         }
 
-        private async void Send_Click(object sender, EventArgs e)
+        private async void SendButton_Click(object sender, EventArgs e)
         {          
             var request = new HttpRequestMessage(HttpMethod.Get, Url.Text);
 
-            for(int i = 1; i <= panel1.Controls.Count / 2; i++)
+            for(int i = 0; i < HeadersAreaPanel.Controls.Count; i++)
             {
-                MessageBox.Show(panel1.Controls.Find($"Key{i}", false)[0].Text + panel1.Controls.Find($"Value{i}", false)[0].Text);
+                Console.WriteLine($"【key】{HeadersAreaPanel.Controls[i].Controls[0].Text}【value】{HeadersAreaPanel.Controls[i].Controls[1].Text}"); 
             }
 
             // リクエストヘッダの設定
@@ -55,29 +57,82 @@ namespace RestClientApp
             this.Result.Text = Regex.Unescape(response.Content.ReadAsStringAsync().Result);
         }
 
-        private void Plus_Click(object sender, EventArgs e)
+        /// <summary>
+        /// +ボタン押下時処理です。
+        /// KeyTextBox,ValueTextBox,DeleteButtonが配置されたHedarPanelを追加します。
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void PlusButton_Click(object sender, EventArgs e)
         {
-            TextBox key   = new TextBox();
-            TextBox value = new TextBox();
 
-            key.Width = value.Width = 180;
-            key.Height = value.Height = 24;
-            key.Top = value.Top = 10 + (15 * panel1.Controls.Count);
-            key.Left = 10;
-            value.Left = key.Left + key.Width + 10;
-            key.Name = "Key" + (panel1.Controls.Count / 2 + 1);
-            value.Name = "Value" + (panel1.Controls.Count / 2 + 1);
+            AddedHeaderIndex++;
 
-            this.panel1.Controls.Add(key);
-            this.panel1.Controls.Add(value);
+            Panel headerPanel = new Panel() {
+                Width = 300,
+                Height = 20,
+                Name = $"HeaderPanel{AddedHeaderIndex}",
+            };
+
+            TextBox keyTextBox = new TextBox()
+            {
+                Width = 100,
+                Height = 30,
+                Top = 0,
+                Left = 0,
+                Name = $"KeyTextBox{AddedHeaderIndex}"
+            };
+            TextBox valueTextBox = new TextBox()
+            {
+                Width = 100,
+                Height = 30,
+                Top = 0,
+                Left = 110,
+                Name = $"valueTextBox{AddedHeaderIndex}"
+            };
+
+            Button deleteButton = new Button()
+            {
+                Width = 20,
+                Height = 20,
+                Top = 0,
+                Left = 220,
+                Text = "－",
+                Name = $"DeleteButton{AddedHeaderIndex}",
+            };
+            deleteButton.Click += DeleteButton_Click;
+
+            headerPanel.Controls.Add(keyTextBox);
+            headerPanel.Controls.Add(valueTextBox);
+            headerPanel.Controls.Add(deleteButton);
+            HeadersAreaPanel.Controls.Add(headerPanel);
+
+            this.relocateHeaderPanel();
+
         }
 
-        private void Minus_Click(object sender, EventArgs e)
+        /// <summary>
+        /// 削除ボタン押下時処理です。
+        /// ボタン名からaddheaderIndexを取得し,対応するHeaderPanelを削除します。
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DeleteButton_Click(object sender, EventArgs e)
         {
-            if (this.panel1.Controls.Count == 0) return;
+            int addedHeaderIndex = int.Parse(((Button)sender).Name.Replace("DeleteButton", ""));
+            HeadersAreaPanel.Controls.RemoveByKey($"HeaderPanel{addedHeaderIndex}");
+            relocateHeaderPanel();
+        }
 
-            this.panel1.Controls.RemoveAt(panel1.Controls.Count - 1);
-            this.panel1.Controls.RemoveAt(panel1.Controls.Count - 1);
+        /// <summary>
+        /// HeaderPanelの位置を再配置します。
+        /// </summary>
+        private void relocateHeaderPanel()
+        {
+            for(int i = 0; i  < HeadersAreaPanel.Controls.Count; i++)
+            {
+                HeadersAreaPanel.Controls[i].Top = i * 20;
+            }
         }
     }
 }

@@ -28,25 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.requestSend = new System.Windows.Forms.Button();
+            this.SendButton = new System.Windows.Forms.Button();
             this.Result = new System.Windows.Forms.TextBox();
             this.Url = new System.Windows.Forms.TextBox();
             this.HttpStatus = new System.Windows.Forms.TextBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.Minus = new System.Windows.Forms.Button();
-            this.Plus = new System.Windows.Forms.Button();
+            this.HeadersAreaPanel = new System.Windows.Forms.Panel();
+            this.PlusButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // requestSend
+            // SendButton
             // 
-            this.requestSend.Location = new System.Drawing.Point(951, 16);
-            this.requestSend.Margin = new System.Windows.Forms.Padding(4);
-            this.requestSend.Name = "requestSend";
-            this.requestSend.Size = new System.Drawing.Size(100, 29);
-            this.requestSend.TabIndex = 0;
-            this.requestSend.Text = "Send";
-            this.requestSend.UseVisualStyleBackColor = true;
-            this.requestSend.Click += new System.EventHandler(this.Send_Click);
+            this.SendButton.Location = new System.Drawing.Point(951, 16);
+            this.SendButton.Margin = new System.Windows.Forms.Padding(4);
+            this.SendButton.Name = "SendButton";
+            this.SendButton.Size = new System.Drawing.Size(100, 29);
+            this.SendButton.TabIndex = 0;
+            this.SendButton.Text = "Send";
+            this.SendButton.UseVisualStyleBackColor = true;
+            this.SendButton.Click += new System.EventHandler(this.SendButton_Click);
             // 
             // Result
             // 
@@ -74,46 +73,35 @@
             this.HttpStatus.Size = new System.Drawing.Size(1037, 22);
             this.HttpStatus.TabIndex = 3;
             // 
-            // panel1
+            // HeadersAreaPanel
             // 
-            this.panel1.AutoScroll = true;
-            this.panel1.Location = new System.Drawing.Point(17, 95);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1038, 143);
-            this.panel1.TabIndex = 4;
+            this.HeadersAreaPanel.AutoScroll = true;
+            this.HeadersAreaPanel.Location = new System.Drawing.Point(17, 95);
+            this.HeadersAreaPanel.Name = "HeadersAreaPanel";
+            this.HeadersAreaPanel.Size = new System.Drawing.Size(1038, 143);
+            this.HeadersAreaPanel.TabIndex = 4;
             // 
-            // Minus
+            // PlusButton
             // 
-            this.Minus.Location = new System.Drawing.Point(123, 66);
-            this.Minus.Name = "Minus";
-            this.Minus.Size = new System.Drawing.Size(75, 23);
-            this.Minus.TabIndex = 1;
-            this.Minus.Text = "-";
-            this.Minus.UseVisualStyleBackColor = true;
-            this.Minus.Click += new System.EventHandler(this.Minus_Click);
-            // 
-            // Plus
-            // 
-            this.Plus.Location = new System.Drawing.Point(34, 66);
-            this.Plus.Name = "Plus";
-            this.Plus.Size = new System.Drawing.Size(75, 23);
-            this.Plus.TabIndex = 0;
-            this.Plus.Text = "+";
-            this.Plus.UseVisualStyleBackColor = true;
-            this.Plus.Click += new System.EventHandler(this.Plus_Click);
+            this.PlusButton.Location = new System.Drawing.Point(34, 66);
+            this.PlusButton.Name = "PlusButton";
+            this.PlusButton.Size = new System.Drawing.Size(75, 23);
+            this.PlusButton.TabIndex = 0;
+            this.PlusButton.Text = "+";
+            this.PlusButton.UseVisualStyleBackColor = true;
+            this.PlusButton.Click += new System.EventHandler(this.PlusButton_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1067, 698);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.HeadersAreaPanel);
             this.Controls.Add(this.HttpStatus);
-            this.Controls.Add(this.Plus);
-            this.Controls.Add(this.Minus);
+            this.Controls.Add(this.PlusButton);
             this.Controls.Add(this.Url);
             this.Controls.Add(this.Result);
-            this.Controls.Add(this.requestSend);
+            this.Controls.Add(this.SendButton);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -125,13 +113,12 @@
 
         #endregion
 
-        private System.Windows.Forms.Button requestSend;
+        private System.Windows.Forms.Button SendButton;
         private System.Windows.Forms.TextBox Result;
         private System.Windows.Forms.TextBox Url;
         private System.Windows.Forms.TextBox HttpStatus;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button Minus;
-        private System.Windows.Forms.Button Plus;
+        private System.Windows.Forms.Panel HeadersAreaPanel;
+        private System.Windows.Forms.Button PlusButton;
     }
 }
 
