@@ -30,7 +30,7 @@
         {
             this.SendButton = new System.Windows.Forms.Button();
             this.Result = new System.Windows.Forms.TextBox();
-            this.Url = new System.Windows.Forms.TextBox();
+            this.UrlList = new System.Windows.Forms.ComboBox();
             this.HttpStatus = new System.Windows.Forms.TextBox();
             this.HeadersAreaPanel = new System.Windows.Forms.Panel();
             this.PlusButton = new System.Windows.Forms.Button();
@@ -57,13 +57,13 @@
             this.Result.Size = new System.Drawing.Size(1034, 410);
             this.Result.TabIndex = 1;
             // 
-            // Url
+            // UrlList
             // 
-            this.Url.Location = new System.Drawing.Point(17, 16);
-            this.Url.Margin = new System.Windows.Forms.Padding(4);
-            this.Url.Name = "Url";
-            this.Url.Size = new System.Drawing.Size(891, 22);
-            this.Url.TabIndex = 2;
+            this.UrlList.Location = new System.Drawing.Point(17, 16);
+            this.UrlList.Margin = new System.Windows.Forms.Padding(4);
+            this.UrlList.Name = "UrlList";
+            this.UrlList.Size = new System.Drawing.Size(891, 23);
+            this.UrlList.TabIndex = 2;
             // 
             // HttpStatus
             // 
@@ -99,7 +99,7 @@
             this.Controls.Add(this.HeadersAreaPanel);
             this.Controls.Add(this.HttpStatus);
             this.Controls.Add(this.PlusButton);
-            this.Controls.Add(this.Url);
+            this.Controls.Add(this.UrlList);
             this.Controls.Add(this.Result);
             this.Controls.Add(this.SendButton);
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -115,7 +115,7 @@
 
         private System.Windows.Forms.Button SendButton;
         private System.Windows.Forms.TextBox Result;
-        private System.Windows.Forms.TextBox Url;
+        private System.Windows.Forms.ComboBox UrlList;
         private System.Windows.Forms.TextBox HttpStatus;
         private System.Windows.Forms.Panel HeadersAreaPanel;
         private System.Windows.Forms.Button PlusButton;

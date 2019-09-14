@@ -1,0 +1,2 @@
+﻿http://weather.livedoor.com/forecast/webservice/json/v1?city=400040
+http://weather.livedoor.com/forecast/webservice/json/v1?city=200040
